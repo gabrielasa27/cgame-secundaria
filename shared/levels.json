@@ -1,0 +1,971 @@
+{
+ "version": 4,
+ "legend": "R = inicio del robot, G = meta, # = roca, * = estrella (cantero), . = casilla libre",
+ "games": [
+  {
+   "id": "G1",
+   "name": "Programadores de Jujuy",
+   "type": "lab",
+   "area": "Algoritmos y simulación",
+   "color": "blue",
+   "description": "Resuelve problemas de la huerta y del agua diseñando algoritmos y probándolos en una simulación.",
+   "objective": "Diseñar algoritmos con repeticiones y condiciones, probarlos en una simulación y justificar cuál es más eficiente."
+  },
+  {
+   "id": "G2",
+   "name": "Detective de Código Python",
+   "type": "quiz",
+   "area": "Programación Python",
+   "color": "sun",
+   "description": "Lee fragmentos de código Python, predice resultados y encuentra errores.",
+   "objective": "Leer, interpretar y depurar código textual (variables, condicionales, ciclos, listas, funciones)."
+  },
+  {
+   "id": "G3",
+   "name": "Desafío de Inteligencia Artificial",
+   "type": "lab",
+   "area": "IA y datos",
+   "color": "violet",
+   "description": "Clasifica datos, construye reglas, evalúa errores y experimenta con un clasificador SVM.",
+   "objective": "Comprender clasificación, entrenamiento y prueba, falsos positivos, sesgos y un clasificador SVM lineal."
+  }
+ ],
+ "levels": [
+  {
+   "id": "G1-L1",
+   "game_id": "G1",
+   "number": 1,
+   "difficulty": "Básico",
+   "title": "Riego de la huerta escolar",
+   "instructions": "Programa a Cody para regar los 6 canteros de la huerta de la escuela. Prueba tu algoritmo en la simulación.",
+   "par_time": 90,
+   "max_slots": 6,
+   "optimal": 6,
+   "lab": {
+    "kind": "build",
+    "goal": "Riega los 6 canteros secos (🟤) usando como máximo 6 bloques. ¡No alcanzan los bloques para repetir todo a mano!",
+    "intro": "Arma el programa con los bloques y pulsa Ejecutar. Mira cómo se mueve Cody.",
+    "cells": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "tank": 6,
+    "max_blocks": 6,
+    "cond": false,
+    "hints": [
+     "Regar y avanzar se repiten una y otra vez. ¿Hay un bloque para repetir?",
+     "Dentro de Repetir pon Regar y Avanzar, y recuerda cuántos canteros hay."
+    ],
+    "preview": "Simulación de riego con bloques"
+   },
+   "questions": [
+    {
+     "q": "¿Por qué conviene usar Repetir en lugar de escribir los mismos bloques muchas veces?",
+     "options": [
+      "Porque logra el mismo resultado con menos instrucciones y es más fácil de modificar",
+      "Porque el robot camina más rápido",
+      "Porque así no hace falta regar",
+      "Porque los bloques sueltos no funcionan"
+     ],
+     "answer": 0,
+     "why": "Un ciclo evita repetir código: el programa queda más corto y más fácil de cambiar.",
+     "hint": "Piensa en cuántos bloques usaste."
+    },
+    {
+     "q": "Si la huerta tuviera 20 canteros, ¿qué tendrías que cambiar en tu programa?",
+     "options": [
+      "Solo el número de repeticiones",
+      "Escribirlo todo de nuevo",
+      "Agregar 14 bloques más",
+      "Nada, funciona igual"
+     ],
+     "answer": 0,
+     "why": "Con un ciclo basta cambiar el número de repeticiones. Por eso los algoritmos con ciclos se adaptan mejor.",
+     "hint": "¿Qué parte del programa depende de la cantidad de canteros?"
+    }
+   ]
+  },
+  {
+   "id": "G1-L2",
+   "game_id": "G1",
+   "number": 2,
+   "difficulty": "Intermedio",
+   "title": "Riego inteligente: ahorrar agua",
+   "instructions": "Algunos canteros ya están húmedos y el tanque comunitario tiene agua justa. Diseña un algoritmo que riegue solo lo necesario.",
+   "par_time": 150,
+   "max_slots": 8,
+   "optimal": 8,
+   "lab": {
+    "kind": "build",
+    "goal": "Riega los canteros secos (🟤) sin desperdiciar agua: el tanque alcanza justo para 5 canteros. Máximo 6 bloques.",
+    "intro": "Ahora tienes el bloque «Si el cantero está seco». ¡Úsalo para decidir cuándo regar!",
+    "cells": [
+     1,
+     0,
+     1,
+     1,
+     0,
+     1,
+     0,
+     1
+    ],
+    "tank": 5,
+    "max_blocks": 6,
+    "cond": true,
+    "hints": [
+     "Regar un cantero que ya está húmedo gasta agua. Necesitas tomar una decisión en cada cantero.",
+     "Dentro de Repetir 8 usa «Si el cantero está seco» con Regar adentro, y luego Avanzar afuera del Si."
+    ],
+    "preview": "Simulación de riego con ciclo y condicional"
+   },
+   "questions": [
+    {
+     "q": "¿Qué hace el bloque «Si el cantero está seco»?",
+     "options": [
+      "Ejecuta los bloques de adentro solo si la condición es verdadera",
+      "Repite los bloques de adentro 5 veces",
+      "Hace avanzar a Cody",
+      "Seca el cantero"
+     ],
+     "answer": 0,
+     "why": "Es un condicional: lo de adentro se ejecuta únicamente cuando la condición se cumple.",
+     "hint": "Mira qué pasaba con el agua cuando regabas todo."
+    },
+    {
+     "q": "Comparando «regar todo» con «regar solo lo seco», ¿cuál es más eficiente en el uso del agua?",
+     "options": [
+      "Regar solo lo seco, porque no gasta agua en canteros húmedos",
+      "Regar todo, porque es más simple",
+      "Los dos gastan lo mismo",
+      "Ninguno necesita agua"
+     ],
+     "answer": 0,
+     "why": "Ambos logran el objetivo, pero el condicional evita desperdiciar agua. En Jujuy, donde el agua es un recurso valioso, eso importa.",
+     "hint": "Compara el agua usada en cada caso."
+    },
+    {
+     "q": "Un tanque comunitario abastece a varias huertas. ¿Qué dato necesita tu algoritmo para no quedarse sin agua?",
+     "options": [
+      "Cuántos canteros están secos",
+      "El color de las macetas",
+      "El nombre de la escuela",
+      "La hora de recreo"
+     ],
+     "answer": 0,
+     "why": "El algoritmo debe depender del estado real de los canteros. Ese es el dato que decide cuánto riego hace falta.",
+     "hint": "¿Qué información cambia la cantidad de agua necesaria?"
+    }
+   ]
+  },
+  {
+   "id": "G1-L3",
+   "game_id": "G1",
+   "number": 3,
+   "difficulty": "Avanzado",
+   "title": "Compara y justifica",
+   "instructions": "Dos algoritmos resuelven el mismo problema de riego. Pruébalos en la simulación y decide cuál es más eficiente.",
+   "par_time": 180,
+   "max_slots": 6,
+   "optimal": 6,
+   "lab": {
+    "kind": "compare",
+    "goal": "Prueba el algoritmo A y el algoritmo B en la huerta de 10 canteros. Compara instrucciones, acciones y agua usada.",
+    "intro": "Pulsa «Probar» en cada algoritmo y compara los resultados.",
+    "cells": [
+     1,
+     0,
+     1,
+     0,
+     1,
+     0,
+     1,
+     0,
+     1,
+     0
+    ],
+    "programs": [
+     {
+      "name": "A",
+      "prog": [
+       {
+        "op": "repetir",
+        "n": 10,
+        "body": [
+         {
+          "op": "regar"
+         },
+         {
+          "op": "avanzar"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "B",
+      "prog": [
+       {
+        "op": "repetir",
+        "n": 10,
+        "body": [
+         {
+          "op": "si_seca",
+          "body": [
+           {
+            "op": "regar"
+           }
+          ]
+         },
+         {
+          "op": "avanzar"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "hints": [
+     "Fíjate en dos números: cuántas instrucciones tiene cada uno y cuánta agua usa.",
+     "El algoritmo con menos instrucciones no siempre es el más eficiente."
+    ],
+    "preview": "Prueba y compara dos algoritmos"
+   },
+   "questions": [
+    {
+     "q": "¿Qué algoritmo usó menos agua?",
+     "options": [
+      "El B",
+      "El A",
+      "Los dos igual",
+      "Ninguno"
+     ],
+     "answer": 0,
+     "why": "El B riega solo los 5 canteros secos y usa 5 de agua; el A riega los 10 y usa 10.",
+     "hint": "Mira el agua usada en cada resultado."
+    },
+    {
+     "q": "¿Qué algoritmo tiene menos instrucciones (bloques)?",
+     "options": [
+      "El A",
+      "El B",
+      "Los dos igual",
+      "Ninguno"
+     ],
+     "answer": 0,
+     "why": "El A tiene 3 bloques y el B tiene 4. Tener menos instrucciones no siempre significa ser mejor.",
+     "hint": "Cuenta los bloques de cada programa."
+    },
+    {
+     "q": "Una escuela con poca agua debe elegir un algoritmo. ¿Cuál elige y cómo lo justifica?",
+     "options": [
+      "El B: gasta menos agua aunque tenga una instrucción más",
+      "El A: tiene menos instrucciones",
+      "El A: riega más",
+      "Cualquiera, no hay diferencia"
+     ],
+     "answer": 0,
+     "why": "Se justifica con evidencia de la simulación: ambos riegan todo, pero B ahorra la mitad del agua. El recurso escaso pesa más que una instrucción extra.",
+     "hint": "Elige según el recurso que escasea."
+    },
+    {
+     "q": "Un semáforo inteligente debe poner en rojo a los autos solo SI hay peatones esperando. ¿Qué estructura usarías?",
+     "options": [
+      "Un condicional (si ... entonces ...)",
+      "Solo un ciclo sin condición",
+      "Ninguna, es imposible automatizarlo",
+      "Un bloque Avanzar"
+     ],
+     "answer": 0,
+     "why": "Decidir según una situación (hay o no peatones) es un condicional, el mismo concepto del bloque «Si el cantero está seco».",
+     "hint": "¿Hay una decisión que depende de una condición?"
+    }
+   ]
+  },
+  {
+   "id": "G2-L1",
+   "game_id": "G2",
+   "number": 1,
+   "difficulty": "Básico",
+   "title": "Primeros pasos con Python",
+   "instructions": "Lee cada fragmento de código y elige la opción correcta. Si te equivocas, puedes volver a intentar la misma pregunta.",
+   "par_time": 150,
+   "max_slots": 4,
+   "questions": [
+    {
+     "q": "¿Qué muestra este programa en pantalla?",
+     "options": [
+      "17",
+      "152",
+      "edad + 2",
+      "Da error"
+     ],
+     "answer": 0,
+     "why": "La variable edad vale 15 y print muestra el resultado de la suma: 17. Los números se suman, no se pegan como texto.",
+     "hint": "Primero guarda un valor en la variable; después se hace una cuenta con ese valor.",
+     "code": "edad = 15\nprint(edad + 2)"
+    },
+    {
+     "q": "Este programa da error de sintaxis. ¿Cuál es el problema?",
+     "options": [
+      "Falta cerrar las comillas del texto",
+      "print se escribe con mayúscula",
+      "Falta un punto al final",
+      "No hay ninguna variable"
+     ],
+     "answer": 0,
+     "why": "El texto abre con comillas pero nunca las cierra. Python exige que las comillas se abran y se cierren.",
+     "hint": "Mira con atención el texto que va entre paréntesis.",
+     "code": "print(\"Hola, mundo)"
+    },
+    {
+     "q": "Completa el programa para que muestre 360. ¿Qué operador va en el hueco?",
+     "options": [
+      "*",
+      "+",
+      "-",
+      "/"
+     ],
+     "answer": 0,
+     "why": "Para obtener el total de varias unidades se multiplica el precio por la cantidad: 120 * 3 = 360.",
+     "hint": "¿Qué operación usas en una tienda para calcular el total de 3 productos iguales?",
+     "code": "precio = 120\ncantidad = 3\ntotal = precio ___ cantidad\nprint(total)"
+    },
+    {
+     "q": "¿Qué muestra este programa?",
+     "options": [
+      "3 1",
+      "3.5 1",
+      "3 2",
+      "1 3"
+     ],
+     "answer": 0,
+     "why": "// es la división entera (7 // 2 = 3) y % es el resto de la división (7 % 2 = 1).",
+     "hint": "// descarta los decimales y % da lo que sobra al dividir.",
+     "code": "x = 7\ny = 2\nprint(x // y, x % y)"
+    }
+   ]
+  },
+  {
+   "id": "G2-L2",
+   "game_id": "G2",
+   "number": 2,
+   "difficulty": "Intermedio",
+   "title": "Programación estructurada",
+   "instructions": "Ahora hay condicionales, ciclos, listas y funciones. Busca el resultado o el error de lógica.",
+   "par_time": 240,
+   "max_slots": 5,
+   "questions": [
+    {
+     "q": "Estas son las notas de un curso. ¿Qué muestra el programa?",
+     "options": [
+      "3",
+      "4",
+      "2",
+      "21"
+     ],
+     "answer": 0,
+     "why": "El ciclo recorre la lista y cuenta solo las notas mayores o iguales a 6: 6, 8 y 9. Son 3.",
+     "hint": "Cuenta cuántas veces se cumple la condición n >= 6.",
+     "code": "notas = [6, 8, 4, 9]\ncantidad = 0\nfor n in notas:\n    if n >= 6:\n        cantidad += 1\nprint(cantidad)"
+    },
+    {
+     "q": "La función debería decir si un número es par, pero con 4 devuelve False. ¿Cuál es el error de lógica?",
+     "options": [
+      "Debe comparar con == 0, no con == 1",
+      "Falta el for",
+      "return no se puede usar",
+      "El nombre es muy largo"
+     ],
+     "answer": 0,
+     "why": "Un número par tiene resto 0 al dividir por 2. La condición == 1 detecta los impares.",
+     "hint": "Piensa qué resto da 4 % 2.",
+     "code": "def es_par(n):\n    return n % 2 == 1"
+    },
+    {
+     "q": "Este ciclo while no termina nunca (ciclo infinito). ¿Qué línea falta dentro del ciclo?",
+     "options": [
+      "contador += 1",
+      "print(contador)",
+      "contador = 5",
+      "break = True"
+     ],
+     "answer": 0,
+     "why": "La variable contador nunca cambia, así que la condición siempre es verdadera. Hay que actualizarla dentro del ciclo.",
+     "hint": "¿Qué debe cambiar en cada vuelta para que la condición algún día sea falsa?",
+     "code": "contador = 0\nwhile contador < 5:\n    print(contador)"
+    },
+    {
+     "q": "¿Qué muestra este programa?",
+     "options": [
+      "No puede votar",
+      "Puede votar",
+      "Da error",
+      "No muestra nada"
+     ],
+     "answer": 0,
+     "why": "edad >= 16 es False. Con and, ambas condiciones deben ser verdaderas, así que se ejecuta el else.",
+     "hint": "Con and tienen que cumplirse las dos condiciones a la vez.",
+     "code": "edad = 15\ntiene_dni = True\nif edad >= 16 and tiene_dni:\n    print(\"Puede votar\")\nelse:\n    print(\"No puede votar\")"
+    },
+    {
+     "q": "Se busca el número mayor de una lista. ¿Qué operador va en el hueco?",
+     "options": [
+      ">",
+      "<",
+      "==",
+      "!="
+     ],
+     "answer": 0,
+     "why": "Se actualiza mayor cuando se encuentra un número más grande que el guardado.",
+     "hint": "Si encuentras un número más grande que el guardado, ¿qué comparación usas?",
+     "code": "mayor = lista[0]\nfor n in lista:\n    if n ___ mayor:\n        mayor = n"
+    }
+   ]
+  },
+  {
+   "id": "G2-L3",
+   "game_id": "G2",
+   "number": 3,
+   "difficulty": "Avanzado",
+   "title": "Depuración y casos límite",
+   "instructions": "Analiza programas con errores ocultos. Piensa en qué entradas pueden hacerlos fallar.",
+   "par_time": 300,
+   "max_slots": 5,
+   "questions": [
+    {
+     "q": "Se espera que muestre 180, pero muestra None. ¿Cuál es el error?",
+     "options": [
+      "Falta return en la función",
+      "Falta el print",
+      "El parámetro se llama igual que la función",
+      "El porcentaje es muy grande"
+     ],
+     "answer": 0,
+     "why": "La función calcula el valor pero no lo devuelve, así que devuelve None. Hay que escribir return antes de la cuenta.",
+     "hint": "Una función solo entrega un valor si usa return.",
+     "code": "def con_descuento(precio, porc):\n    precio - precio * porc / 100\nprint(con_descuento(200, 10))"
+    },
+    {
+     "q": "¿Con qué entrada falla esta función (caso límite)?",
+     "options": [
+      "Con una lista vacía []",
+      "Con [1, 2, 3]",
+      "Con [10]",
+      "Con [0, 0, 0]"
+     ],
+     "answer": 0,
+     "why": "Con una lista vacía len(lista) es 0 y se divide por cero: ZeroDivisionError. Los casos límite son entradas extremas, como vacío o cero.",
+     "hint": "¿Qué pasa con len(lista) si la lista no tiene elementos?",
+     "code": "def promedio(lista):\n    return sum(lista) / len(lista)"
+    },
+    {
+     "q": "¿Qué tipo de error produce la última línea al ejecutarse?",
+     "options": [
+      "Error de ejecución (KeyError)",
+      "Error de sintaxis",
+      "Error de lógica",
+      "No produce error"
+     ],
+     "answer": 0,
+     "why": "La sintaxis es correcta, pero la clave \"goma\" no existe en el diccionario. Falla mientras corre: es un error de ejecución.",
+     "hint": "¿El código está bien escrito? ¿Existe la clave que se pide?",
+     "code": "stock = {\"lapiz\": 10, \"regla\": 0}\nprint(stock[\"goma\"])"
+    },
+    {
+     "q": "El programa corre sin errores pero calcula mal el IVA del 21 % (usa 0.21 en vez de 21 / 100 en un lugar y 21 en otro). ¿Qué tipo de error es?",
+     "options": [
+      "Error de lógica",
+      "Error de sintaxis",
+      "Error de ejecución",
+      "No es un error"
+     ],
+     "answer": 0,
+     "why": "El programa funciona pero da un resultado incorrecto. Es un error de lógica y se detecta con casos de prueba.",
+     "hint": "Si el programa no se detiene pero el resultado es incorrecto, ¿de qué tipo es?"
+    },
+    {
+     "q": "La regla dice que con 6 o más se aprueba, pero la función desaprueba a quien saca 6. ¿Qué caso de prueba detecta el fallo?",
+     "options": [
+      "nota = 6",
+      "nota = 9",
+      "nota = 2",
+      "nota = 0"
+     ],
+     "answer": 0,
+     "why": "Los fallos suelen aparecer en el borde de una condición. Probar con 6 muestra que debía usar >=.",
+     "hint": "Prueba justo el valor donde la condición cambia de resultado.",
+     "code": "def estado(nota):\n    if nota > 6:\n        return \"Aprobado\"\n    return \"Desaprobado\""
+    }
+   ]
+  },
+  {
+   "id": "G3-L1",
+   "game_id": "G3",
+   "number": 1,
+   "difficulty": "Básico",
+   "title": "Exploradores de datos",
+   "instructions": "Clasifica ejemplos de residuos de la escuela según sus atributos. Si faltan datos, márcalos.",
+   "par_time": 120,
+   "max_slots": 9,
+   "optimal": 9,
+   "lab": {
+    "kind": "classify",
+    "goal": "Clasifica cada residuo en su categoría (la etiqueta) usando sus atributos. Si falta información, elige «Dato incompleto».",
+    "intro": "Mira los atributos del ejemplo y toca la categoría que le corresponde.",
+    "bins": [
+     "Orgánico",
+     "Reciclable",
+     "Dato incompleto"
+    ],
+    "items": [
+     {
+      "icon": "🍌",
+      "text": "Cáscara de banana",
+      "attr": "Material: restos de comida",
+      "label": "Orgánico",
+      "why": "Los restos de comida son orgánicos: van al compost de la huerta.",
+      "clue": "Mira el material."
+     },
+     {
+      "icon": "🥤",
+      "text": "Botella de plástico",
+      "attr": "Material: plástico",
+      "label": "Reciclable",
+      "why": "El plástico limpio se recicla.",
+      "clue": "Mira el material."
+     },
+     {
+      "icon": "📰",
+      "text": "Diario viejo",
+      "attr": "Material: papel",
+      "label": "Reciclable",
+      "why": "El papel se recicla.",
+      "clue": "Mira el material."
+     },
+     {
+      "icon": "🍎",
+      "text": "Resto de manzana",
+      "attr": "Material: restos de comida",
+      "label": "Orgánico",
+      "why": "Es un resto de comida, igual que la cáscara de banana: el patrón es el material.",
+      "clue": "Compara con la cáscara de banana."
+     },
+     {
+      "icon": "🥫",
+      "text": "Lata de conserva",
+      "attr": "Material: metal",
+      "label": "Reciclable",
+      "why": "El metal se recicla.",
+      "clue": "Mira el material."
+     },
+     {
+      "icon": "❓",
+      "text": "Objeto sin descripción",
+      "attr": "Material: ???",
+      "label": "Dato incompleto",
+      "why": "Sin el atributo material no se puede clasificar con seguridad. Hay que completar el dato.",
+      "clue": "¿Tiene toda la información?"
+     }
+    ],
+    "hints": [
+     "Busca el patrón: ¿qué atributo decide la categoría?",
+     "Si un atributo dice ???, el dato está incompleto."
+    ],
+    "preview": "Clasificación de ejemplos"
+   },
+   "questions": [
+    {
+     "q": "En esta actividad, ¿qué es la etiqueta de cada ejemplo?",
+     "options": [
+      "La categoría que se quiere predecir (Orgánico o Reciclable)",
+      "El nombre del objeto",
+      "El color del objeto",
+      "La hora en que se tiró"
+     ],
+     "answer": 0,
+     "why": "La etiqueta es la respuesta que se quiere predecir. El material es un atributo (dato de entrada).",
+     "hint": "La etiqueta es lo que el sistema debe decidir."
+    },
+    {
+     "q": "¿Qué diferencia a un modelo que aprende de una regla fija?",
+     "options": [
+      "El modelo ajusta su comportamiento a partir de ejemplos",
+      "La regla fija aprende sola",
+      "El modelo no usa datos",
+      "No hay diferencia"
+     ],
+     "answer": 0,
+     "why": "Una regla fija la escribe una persona. Un modelo se entrena con ejemplos y encuentra patrones en los datos.",
+     "hint": "¿Quién decide el criterio, una persona o los datos?"
+    },
+    {
+     "q": "Un ejemplo no tiene el atributo «material». ¿Qué conviene hacer?",
+     "options": [
+      "Completar o revisar el dato antes de usarlo",
+      "Inventar un material",
+      "Ignorar el problema",
+      "Usarlo igual para entrenar"
+     ],
+     "answer": 0,
+     "why": "Los datos incompletos pueden confundir al modelo. Conviene completarlos o dejarlos fuera del entrenamiento.",
+     "hint": "Un dato sin información puede engañar."
+    }
+   ]
+  },
+  {
+   "id": "G3-L2",
+   "game_id": "G3",
+   "number": 2,
+   "difficulty": "Intermedio",
+   "title": "Entrenamiento y evaluación",
+   "instructions": "Construye una regla para decidir si hay que regar. Se evalúa con ejemplos de entrenamiento y de prueba.",
+   "par_time": 180,
+   "max_slots": 5,
+   "optimal": 5,
+   "lab": {
+    "kind": "rule",
+    "goal": "Construye una regla que logre al menos 85 % de exactitud en los datos de PRUEBA (los que no usaste para armarla).",
+    "intro": "Elige la variable, el umbral y pulsa Probar regla. Mira la matriz de confusión.",
+    "target": 0.85,
+    "vars": [
+     {
+      "id": "humedad",
+      "name": "Humedad del suelo (%)",
+      "min": 0,
+      "max": 100,
+      "val": 50
+     },
+     {
+      "id": "temperatura",
+      "name": "Temperatura (°C)",
+      "min": 15,
+      "max": 40,
+      "val": 28
+     }
+    ],
+    "train": [
+     {
+      "humedad": 15,
+      "temperatura": 34,
+      "y": 1
+     },
+     {
+      "humedad": 22,
+      "temperatura": 30,
+      "y": 1
+     },
+     {
+      "humedad": 30,
+      "temperatura": 28,
+      "y": 1
+     },
+     {
+      "humedad": 35,
+      "temperatura": 33,
+      "y": 1
+     },
+     {
+      "humedad": 42,
+      "temperatura": 26,
+      "y": 1
+     },
+     {
+      "humedad": 55,
+      "temperatura": 24,
+      "y": 0
+     },
+     {
+      "humedad": 62,
+      "temperatura": 31,
+      "y": 0
+     },
+     {
+      "humedad": 70,
+      "temperatura": 22,
+      "y": 0
+     },
+     {
+      "humedad": 78,
+      "temperatura": 27,
+      "y": 0
+     },
+     {
+      "humedad": 88,
+      "temperatura": 29,
+      "y": 0
+     }
+    ],
+    "test": [
+     {
+      "humedad": 18,
+      "temperatura": 25,
+      "y": 1
+     },
+     {
+      "humedad": 28,
+      "temperatura": 32,
+      "y": 1
+     },
+     {
+      "humedad": 38,
+      "temperatura": 27,
+      "y": 1
+     },
+     {
+      "humedad": 47,
+      "temperatura": 30,
+      "y": 1
+     },
+     {
+      "humedad": 51,
+      "temperatura": 26,
+      "y": 1
+     },
+     {
+      "humedad": 58,
+      "temperatura": 29,
+      "y": 0
+     },
+     {
+      "humedad": 66,
+      "temperatura": 35,
+      "y": 0
+     },
+     {
+      "humedad": 75,
+      "temperatura": 21,
+      "y": 0
+     },
+     {
+      "humedad": 90,
+      "temperatura": 24,
+      "y": 0
+     }
+    ],
+    "hints": [
+     "No todas las variables sirven igual. Prueba cuál separa mejor «regar» de «no regar».",
+     "Si la regla va mejor en entrenamiento que en prueba, quizás se ajustó demasiado a esos ejemplos."
+    ],
+    "preview": "Regla con umbral, entrenamiento y prueba"
+   },
+   "questions": [
+    {
+     "q": "El modelo dice «regar», pero el cantero no lo necesitaba. ¿Qué tipo de error es?",
+     "options": [
+      "Falso positivo",
+      "Falso negativo",
+      "Verdadero positivo",
+      "Verdadero negativo"
+     ],
+     "answer": 0,
+     "why": "Predijo «regar» (positivo) y la realidad era «no regar»: falso positivo.",
+     "hint": "El modelo dijo «sí» pero era «no»."
+    },
+    {
+     "q": "¿Por qué evaluar solo con los datos de entrenamiento puede dar un resultado engañoso?",
+     "options": [
+      "El modelo podría haber memorizado esos ejemplos",
+      "Porque son muy pocos",
+      "Porque no tienen etiquetas",
+      "No es engañoso"
+     ],
+     "answer": 0,
+     "why": "Con datos nuevos (prueba) se ve si el modelo generaliza. En entrenamiento puede parecer perfecto solo por memorizar.",
+     "hint": "Es como estudiar un examen y que te tomen el mismo."
+    },
+    {
+     "q": "Una regla acertó 7 de 8 ejemplos de prueba. ¿Cuál es la exactitud?",
+     "options": [
+      "87,5 %",
+      "7 %",
+      "78 %",
+      "80 %"
+     ],
+     "answer": 0,
+     "why": "Exactitud = aciertos / total = 7 / 8 = 0,875, es decir 87,5 %.",
+     "hint": "Divide los aciertos por el total."
+    }
+   ]
+  },
+  {
+   "id": "G3-L3",
+   "game_id": "G3",
+   "number": 3,
+   "difficulty": "Avanzado",
+   "title": "Experimenta con un clasificador SVM",
+   "instructions": "Entrena un clasificador SVM lineal con datos etiquetados y observa cómo cambian las predicciones al modificar las variables de entrada.",
+   "par_time": 240,
+   "max_slots": 8,
+   "optimal": 8,
+   "lab": {
+    "kind": "svm",
+    "goal": "Entrena el SVM con humedad y temperatura, evalúalo con los datos de prueba, y repite quitando la temperatura. Compara resultados.",
+    "intro": "El SVM se entrena de verdad en tu navegador con ejemplos etiquetados (no con reglas escritas a mano).",
+    "C": 10,
+    "train": [
+     {
+      "x": 1,
+      "y": 1,
+      "c": 1
+     },
+     {
+      "x": 1.5,
+      "y": 2,
+      "c": 1
+     },
+     {
+      "x": 3,
+      "y": 3,
+      "c": 1
+     },
+     {
+      "x": 4,
+      "y": 5,
+      "c": 1
+     },
+     {
+      "x": 5,
+      "y": 7,
+      "c": 1
+     },
+     {
+      "x": 6,
+      "y": 8.5,
+      "c": 1
+     },
+     {
+      "x": 2,
+      "y": 4,
+      "c": 1
+     },
+     {
+      "x": 5.5,
+      "y": 1,
+      "c": 0
+     },
+     {
+      "x": 6.5,
+      "y": 3,
+      "c": 0
+     },
+     {
+      "x": 8,
+      "y": 5,
+      "c": 0
+     },
+     {
+      "x": 7.5,
+      "y": 2,
+      "c": 0
+     },
+     {
+      "x": 9,
+      "y": 7,
+      "c": 0
+     },
+     {
+      "x": 9.5,
+      "y": 9,
+      "c": 0
+     },
+     {
+      "x": 6,
+      "y": 0.5,
+      "c": 0
+     }
+    ],
+    "test": [
+     {
+      "x": 3.5,
+      "y": 4.5,
+      "c": 1
+     },
+     {
+      "x": 5.5,
+      "y": 8,
+      "c": 1
+     },
+     {
+      "x": 2.5,
+      "y": 1,
+      "c": 1
+     },
+     {
+      "x": 7,
+      "y": 3,
+      "c": 0
+     },
+     {
+      "x": 6.2,
+      "y": 4,
+      "c": 0
+     },
+     {
+      "x": 8.5,
+      "y": 8,
+      "c": 0
+     }
+    ],
+    "hints": [
+     "Primero pulsa Entrenar SVM y luego Evaluar con datos de prueba.",
+     "Desmarca «Usar temperatura» y repite. ¿Cambia la exactitud?"
+    ],
+    "preview": "Clasificador SVM lineal (entrenamiento real en el navegador)"
+   },
+   "questions": [
+    {
+     "q": "En un SVM, ¿qué es el margen?",
+     "options": [
+      "La separación entre la frontera y los ejemplos más cercanos de cada clase",
+      "La cantidad de datos de prueba",
+      "El número de errores",
+      "El nombre de la variable"
+     ],
+     "answer": 0,
+     "why": "El SVM busca la frontera de decisión que deja el mayor margen entre las dos clases (las líneas punteadas del gráfico).",
+     "hint": "Mira las líneas punteadas del gráfico."
+    },
+    {
+     "q": "¿Cómo se entrena un SVM?",
+     "options": [
+      "Con ejemplos etiquetados de dos clases",
+      "Escribiendo reglas a mano",
+      "Sin datos",
+      "Solo con datos de prueba"
+     ],
+     "answer": 0,
+     "why": "Un SVM aprende la frontera a partir de datos con etiquetas. No se programa con reglas escritas manualmente.",
+     "hint": "Necesita ejemplos con su respuesta correcta."
+    },
+    {
+     "q": "Al quitar la temperatura, las predicciones empeoraron. ¿Qué significa?",
+     "options": [
+      "Esa variable aportaba información útil para clasificar",
+      "El SVM dejó de funcionar",
+      "Los datos de prueba están mal",
+      "Siempre conviene usar menos variables"
+     ],
+     "answer": 0,
+     "why": "Las variables de entrada influyen en la frontera y en las predicciones. Quitar una variable informativa reduce la exactitud.",
+     "hint": "Compara las dos exactitudes."
+    },
+    {
+     "q": "El SVM se entrenó solo con datos de la huerta de una escuela y se usará en otras. ¿Cuál es el riesgo?",
+     "options": [
+      "Un sesgo en los datos: puede fallar con otros contextos",
+      "Ninguno",
+      "Que sea perfecto",
+      "Que no use etiquetas"
+     ],
+     "answer": 0,
+     "why": "Si los datos no representan todos los casos, el modelo hereda ese sesgo y generaliza peor.",
+     "hint": "¿Los datos representan a todas las huertas?"
+    }
+   ]
+  }
+ ]
+}

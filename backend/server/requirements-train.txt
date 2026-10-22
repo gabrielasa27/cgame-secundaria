@@ -1,0 +1,3 @@
+# Solo para reentrenar el modelo en tu computadora (python -m recommender.train); NO se instala en el servidor.
+scikit-learn==1.8.0
+numpy==2.4.4

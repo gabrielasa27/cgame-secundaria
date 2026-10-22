@@ -1,0 +1,25 @@
+# Despliegue en Render.com (plan gratuito).
+#
+# IMPORTANTE: Render solo lee este archivo si está en la RAÍZ del repositorio,
+# no aquí en backend/server/. Antes de desplegar, copia este archivo a la raíz
+# del repo que conectes a Render (o crea uno ahí con "Add file" → "Create new
+# file" en GitHub y pega este contenido).
+#
+# Pasos: sube el proyecto a GitHub → en Render "New +" → "Blueprint" → elige el
+# repo. Render arma el servicio solo a partir de este archivo.
+services:
+  - type: web
+    name: cgame-api
+    runtime: docker
+    dockerfilePath: ./backend/server/Dockerfile
+    dockerContext: .            # "." porque este archivo vive en la raíz del repo
+    plan: free                  # el plan free NO admite discos persistentes (por eso no hay sección "disk":
+                                 # los datos se borran si Render reinicia el servicio; sube a un plan pago,
+                                 # o usa una base de datos externa, si necesitas que persistan)
+    envVars:
+      - key: CGAME_SECRET_KEY
+        generateValue: true
+      - key: CGAME_ADMIN_KEY
+        generateValue: true     # cópiala desde Render → tu servicio → "Environment" para entrar a /admin
+      - key: CGAME_CORS_ORIGIN
+        value: "*"
